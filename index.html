@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beautiful Score Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+
+<body>
+    <div class="scoreboard">
+        <div class="team team-one">
+            <div class="name-wrapper">
+                <input class="team-name" type="text" value="Team A" readonly />
+                <button class="edit-name" data-team="one" title="Rename"><svg viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
+                    </svg></button>
+            </div>
+            <div class="score" id="score-one">0</div>
+            <div class="controls">
+                <button class="btn minus" data-team="one">–</button>
+                <button class="btn plus" data-team="one">+</button>
+            </div>
+        </div>
+        <div class="team team-two">
+            <div class="name-wrapper">
+                <input class="team-name" type="text" value="Team B" readonly />
+                <button class="edit-name" data-team="two" title="Rename"><svg viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
+                    </svg></button>
+            </div>
+            <div class="score" id="score-two">0</div>
+            <div class="controls">
+                <button class="btn minus" data-team="two">–</button>
+                <button class="btn plus" data-team="two">+</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

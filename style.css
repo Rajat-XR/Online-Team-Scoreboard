@@ -1,0 +1,148 @@
+:root {
+    --primary: #6750A4;
+    --on-primary: #FFFFFF;
+    --secondary: #FF80AB;
+    --on-secondary: #000000;
+    --background: #ECE6F0;
+    --surface: #F5F0FA;
+    --surface-container: #FFFFFF;
+    --font: 'Roboto', sans-serif;
+    --elevation: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --radius: 28px;
+}
+
+* {
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    background: var(--background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 16px;
+}
+
+.scoreboard {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    height: 90vh;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--elevation);
+    background: var(--surface);
+}
+
+/* === TEAM PANELS === */
+.team {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.team-one {
+    background-color: #EADDFF;
+    color: var(--primary);
+}
+
+.team-two {
+    background-color: #FFD8E4;
+    color: var(--secondary);
+}
+
+/* === TEAM NAME === */
+.name-wrapper {
+    position: relative;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--surface-container);
+    border-radius: 100px;
+    padding: 8px 16px;
+    box-shadow: var(--elevation);
+}
+
+.team-name {
+    border: none;
+    background: transparent;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: inherit;
+    width: 100%;
+    outline: none;
+    cursor: default;
+}
+
+.edit-name {
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.edit-name:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* === SCORE === */
+.score {
+    font-size: 10rem;
+    font-weight: 700;
+}
+
+/* === CONTROLS === */
+.controls {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 100px;
+    font-size: 2rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: var(--elevation);
+    background-color: var(--on-primary);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-two .btn {
+    background-color: var(--on-secondary);
+    color: var(--secondary);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* === SVG ICON (EDIT) === */
+.edit-name svg {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
