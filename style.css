@@ -1,81 +1,209 @@
+@font-face {
+    font-family: Product_Sans_bold;
+    src: url(fonts/Product_Sans_Bold.ttf);
+}
+
+@font-face {
+    font-family: Product_Sans_regular;
+    src: url(fonts/Product_Sans_Regular.ttf);
+}
+
 :root {
-    --primary: #6750A4;
+    --primary: #685596;
+    --secondary: #633f1c;
+    --background-team-one: #d9c9f3;
+    --background-team-two: #ffdccc;
     --on-primary: #FFFFFF;
-    --secondary: #FF80AB;
-    --on-secondary: #000000;
-    --background: #ECE6F0;
-    --surface: #F5F0FA;
-    --surface-container: #FFFFFF;
-    --font: 'Roboto', sans-serif;
+    --font-bold: "Product_Sans_bold";
+    --font-regular: "Product_Sans_bold";
     --elevation: 0 4px 12px rgba(0, 0, 0, 0.08);
     --radius: 28px;
 }
 
 * {
     box-sizing: border-box;
-    transition: all 0.2s ease;
+    /* Removed transition from all elements to avoid conflicts with GSAP */
 }
 
 body {
     margin: 0;
-    font-family: var(--font);
-    background: var(--background);
+    font-family: var(--font-bold);
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding: 16px;
+    padding: 0;
+    /* Remove padding for full screen */
+    overflow: hidden;
+    /* Prevent scrollbars */
 }
 
 .scoreboard {
     display: flex;
-    width: 100%;
-    max-width: 1100px;
-    height: 90vh;
-    border-radius: var(--radius);
+    position: relative;
+    /* Needed for absolute positioning of the center panel */
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    /* Remove border radius for full screen */
     overflow: hidden;
-    box-shadow: var(--elevation);
-    background: var(--surface);
+    box-shadow: none;
+    /* Remove shadow for full screen */
+}
+
+/* === RESET BUTTON === */
+.reset-btn {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font-bold);
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.reset-btn:hover {
+    transform: translateX(-50%) scale(1.05);
+    background: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.reset-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* === WIN PROBABILITY METER === */
+.probability-meter {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    padding: 16px 24px;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 300px;
+    text-align: center;
+}
+
+.meter-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 12px;
+    font-family: var(--font-bold);
+}
+
+.meter-bar {
+    position: relative;
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #888, #aaa);
+    border-radius: 6px;
+    transition: all 0.4s ease;
+    width: 50%;
+}
+
+.meter-center-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateX(-50%);
+}
+
+.meter-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #666;
+}
+
+.team-a-label {
+    color: var(--primary);
+}
+
+.team-b-label {
+    color: var(--secondary);
 }
 
 /* === TEAM PANELS === */
 .team {
     flex: 1;
-    padding: 32px;
+    padding: 48px;
+    /* Increased from 32px */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    transition: all 0.2s ease;
+    min-width: 400px;
+    /* Added minimum width for better space utilization */
 }
 
 .team-one {
-    background-color: #EADDFF;
+    background-color: var(--background-team-one);
     color: var(--primary);
 }
 
 .team-two {
-    background-color: #FFD8E4;
+    background-color: var(--background-team-two);
     color: var(--secondary);
 }
 
 /* === TEAM NAME === */
 .name-wrapper {
     position: relative;
-    width: 80%;
+    width: 90%;
+    /* Increased from 80% */
+    max-width: 350px;
+    /* Added max-width for better proportions */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--surface-container);
-    border-radius: 100px;
-    padding: 8px 16px;
-    box-shadow: var(--elevation);
+    /* background-color: var(--on-primary); */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 12px 20px;
+    /* Increased padding */
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.12);
 }
 
 .team-name {
     border: none;
     background: transparent;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 800;
+    font-family: var(--font-bold);
     text-align: center;
     color: inherit;
     width: 100%;
@@ -94,50 +222,90 @@ body {
     align-items: center;
     justify-content: center;
     color: inherit;
-    width: 36px;
-    height: 36px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
+    transition: background-color 0.2s ease;
 }
 
 .edit-name:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(77, 77, 77, 0.103);
+}
+
+/* === SCORE CONTAINER === */
+.score-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
 /* === SCORE === */
 .score {
-    font-size: 10rem;
-    font-weight: 700;
+    font-size: 16rem;
+    font-weight: 600;
+}
+
+/* === TROPHY === */
+.trophy {
+    font-size: 4rem;
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    animation: trophyGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes trophyGlow {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        transform: translateY(-50%) scale(1);
+    }
+
+    100% {
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+        transform: translateY(-50%) scale(1.1);
+    }
 }
 
 /* === CONTROLS === */
 .controls {
     display: flex;
-    gap: 20px;
+    gap: 32px;
+    /* Increased from 20px */
 }
 
 .btn {
-    width: 64px;
-    height: 64px;
+    width: 140px;
+    /* Increased from 124px */
+    height: 72px;
+    /* Increased from 64px */
     border-radius: 100px;
     font-size: 2rem;
     border: none;
     font-weight: bold;
     cursor: pointer;
     box-shadow: var(--elevation);
-    background-color: var(--on-primary);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.1s ease;
 }
 
 .team-two .btn {
-    background-color: var(--on-secondary);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     color: var(--secondary);
 }
 
 .btn:active {
     transform: scale(0.95);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.12);
 }
 
 /* === SVG ICON (EDIT) === */
@@ -145,4 +313,74 @@ body {
     width: 20px;
     height: 20px;
     pointer-events: none;
+}
+
+/* === CENTER PANEL === */
+.center-panel {
+    position: absolute;
+    bottom: 40px;
+    /* Position at bottom instead of center */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 20px 32px;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-family: var(--font-regular);
+}
+
+.diff-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 16px;
+    margin-top: 0;
+}
+
+.check-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 30px;
+    background-color: black;
+    /* Using a distinct, vibrant color */
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.check-btn:hover {
+    transform: scale(1.05);
+    background-color: black;
+    /* Slightly darker shade on hover */
+}
+
+.plus,
+.minus {
+    font-size: 2.5em;
+}
+
+/* === RESPONSIVE ADJUSTMENTS === */
+@media (max-width: 768px) {
+    .trophy {
+        right: -40px;
+        font-size: 3rem;
+    }
+
+    .probability-meter {
+        width: 250px;
+        top: 70px;
+    }
+
+    .reset-btn {
+        top: 15px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
 }
