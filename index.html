@@ -7,33 +7,71 @@
     <title>Beautiful Score Calculator</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
     <div class="scoreboard">
+        <!-- Reset Button -->
+        <button id="reset-btn" class="reset-btn" title="Reset All">
+            <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM13 17h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+            Reset
+        </button>
+
+        <!-- Win Probability Meter -->
+        <div class="probability-meter">
+            <div class="meter-label">Win Probability</div>
+            <div class="meter-bar">
+                <div class="meter-fill" id="probability-fill"></div>
+                <div class="meter-center-line"></div>
+            </div>
+            <div class="meter-labels">
+                <span class="team-a-label">Team A</span>
+                <span class="team-b-label">Team B</span>
+            </div>
+        </div>
+
         <div class="team team-one">
             <div class="name-wrapper">
-                <input class="team-name" type="text" value="Team A" readonly />
-                <button class="edit-name" data-team="one" title="Rename"><svg viewBox="0 0 24 24">
+                <input id="name-one" class="team-name" type="text" value="Team A" readonly />
+                <button class="edit-name" data-team="one" title="Rename">
+                    <svg viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
-                    </svg></button>
+                    </svg>
+                </button>
             </div>
-            <div class="score" id="score-one">0</div>
+            <div class="score-container">
+                <div class="score" id="score-one">0</div>
+                <div class="trophy" id="trophy-one">🏆</div>
+            </div>
             <div class="controls">
                 <button class="btn minus" data-team="one">–</button>
                 <button class="btn plus" data-team="one">+</button>
             </div>
         </div>
+
+        <div class="center-panel">
+            <p id="difference" class="diff-text">🤝 Scores are tied!</p>
+            <button id="check-winner" class="check-btn">🎉 Check Winner</button>
+        </div>
+
         <div class="team team-two">
             <div class="name-wrapper">
-                <input class="team-name" type="text" value="Team B" readonly />
-                <button class="edit-name" data-team="two" title="Rename"><svg viewBox="0 0 24 24">
+                <input id="name-two" class="team-name" type="text" value="Team B" readonly />
+                <button class="edit-name" data-team="two" title="Rename">
+                    <svg viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
-                    </svg></button>
+                    </svg>
+                </button>
             </div>
-            <div class="score" id="score-two">0</div>
+            <div class="score-container">
+                <div class="score" id="score-two">0</div>
+                <div class="trophy" id="trophy-two">🏆</div>
+            </div>
             <div class="controls">
                 <button class="btn minus" data-team="two">–</button>
                 <button class="btn plus" data-team="two">+</button>
