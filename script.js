@@ -85,35 +85,36 @@ function updateDifference() {
 /**
  * Updates the win probability meter
  */
+/**
+ * Updates the win probability meter
+ */
 function updateProbabilityMeter() {
+  // Get references to the two fill elements
+  const fillOne = document.getElementById('probability-fill-one');
+  const fillTwo = document.getElementById('probability-fill-two');
+
   const scoreA = parseInt(document.getElementById('score-one').textContent, 10);
   const scoreB = parseInt(document.getElementById('score-two').textContent, 10);
-  const fill = document.getElementById('probability-fill');
-  const bar = fill.parentElement;
 
   const totalScore = scoreA + scoreB;
-  let probability = 50;
+  let probabilityA = 50; // Default to a 50/50 split for ties
 
-  if (totalScore > 0) {
+  // Only calculate a different probability if the scores are not tied
+  if (scoreA !== scoreB) {
     const scoreDiff = scoreA - scoreB;
     const maxDiff = Math.max(10, totalScore);
-    probability = 50 + (scoreDiff / maxDiff) * 40;
-    probability = Math.max(10, Math.min(90, probability));
+    probabilityA = 50 + (scoreDiff / maxDiff) * 40;
+    // Clamp between 10-90% for a better visual effect on large differences
+    probabilityA = Math.max(10, Math.min(90, probabilityA));
   }
 
-  if (scoreB > scoreA) {
-    bar.style.direction = 'rtl';
-    fill.style.width = `${100 - probability}%`;
-    fill.style.background = 'linear-gradient(90deg, #ffa366, #633f1c)';
-  } else {
-    bar.style.direction = 'ltr';
-    fill.style.width = `${probability}%`;
-    if (scoreA > scoreB) {
-      fill.style.background = 'linear-gradient(90deg, #685596, #8a7db8)';
-    } else {
-      fill.style.background = 'linear-gradient(90deg, #888, #aaa)';
-    }
-  }
+  // Team B's probability is always the remainder
+  const probabilityB = 100 - probabilityA;
+
+  // Set the width of both fills. 
+  // The colors are now handled entirely by your CSS and will always show.
+  fillOne.style.width = `${probabilityA}%`;
+  fillTwo.style.width = `${probabilityB}%`;
 }
 
 /**

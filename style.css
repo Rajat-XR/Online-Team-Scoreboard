@@ -54,7 +54,7 @@ body {
 /* === RESET BUTTON === */
 .reset-btn {
     position: absolute;
-    top: 20px;
+    bottom: 11.7em;
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
@@ -94,7 +94,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 15;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(15px);
     padding: 16px 24px;
     border-radius: 20px;
@@ -119,14 +119,25 @@ body {
     border-radius: 6px;
     overflow: hidden;
     margin-bottom: 8px;
+    display: flex;
+    /* This is the key change to align the two fills */
 }
 
+/* A new base style for both fills */
 .meter-fill {
     height: 100%;
-    background: linear-gradient(90deg, #888, #aaa);
-    border-radius: 6px;
-    transition: all 0.4s ease;
-    width: 50%;
+    transition: width 0.4s ease-in-out;
+    /* Animate the width change */
+}
+
+/* Specific style for Team A's fill */
+.meter-fill-one {
+    background: var(--primary);
+}
+
+/* Specific style for Team B's fill */
+.meter-fill-two {
+    background: #a16932;
 }
 
 .meter-center-line {
@@ -142,7 +153,7 @@ body {
 .meter-labels {
     display: flex;
     justify-content: space-between;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #666;
 }
@@ -201,7 +212,7 @@ body {
 .team-name {
     border: none;
     background: transparent;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 800;
     font-family: var(--font-bold);
     text-align: center;
@@ -243,19 +254,19 @@ body {
 
 /* === SCORE === */
 .score {
-    font-size: 16rem;
+    font-size: 22rem;
     font-weight: 600;
 }
 
 /* === TROPHY === */
 .trophy {
-    font-size: 4rem;
+    font-size: 8rem;
     position: absolute;
-    right: -80px;
+    right: -150px;
     top: 50%;
     transform: translateY(-50%);
     display: none;
-    animation: trophyGlow 2s ease-in-out infinite alternate;
+    animation: trophyGlow 1s ease-in-out infinite alternate;
 }
 
 @keyframes trophyGlow {
@@ -318,13 +329,13 @@ body {
 /* === CENTER PANEL === */
 .center-panel {
     position: absolute;
-    bottom: 40px;
+    bottom: 50px;
     /* Position at bottom instead of center */
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
     text-align: center;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(10px);
     padding: 20px 32px;
     border-radius: 24px;
@@ -364,6 +375,23 @@ body {
 .plus,
 .minus {
     font-size: 2.5em;
+}
+
+/* === VERTICAL SIDE BRANDING (Corrected for Centering) === */
+.branding-sidebar {
+    position: fixed;
+    left: 20px;
+    /* Distance from the left edge of the page */
+    top: 51%;
+    /* Aligns the pivot to the vertical center */
+    transform-origin: top left;
+    transform: rotate(-90deg) translateX(-50%);
+    z-index: 100;
+    font-family: var(--font-regular);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: rgba(0, 0, 0, 0.4);
 }
 
 /* === RESPONSIVE ADJUSTMENTS === */
